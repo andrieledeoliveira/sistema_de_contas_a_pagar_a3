@@ -144,6 +144,32 @@ public class Principal {
     }
 
     /**
+     * Realiza a consulta de uma conta cadastrada pelo número do documento.
+     * Solicita ao usuário o documento que deseja pesquisar e utiliza o método
+     * pesquisaDocumento() para localizar a conta. Caso encontre, exibe todas as
+     * informações da conta. Caso contrário, informa que nenhuma conta foi
+     * encontrada.
+     */
+    static void consulta() {
+        char opcao1;
+        do {
+            printCabecalho();
+            System.out.println("CONSULTA DE CONTA");
+            System.out.println("DIGITE O NÚMERO DO DOCUMENTO QUE DESEJA PESQUISAR:");
+            String documentoPesquisado = sc.nextLine();
+            int posicaoPesquisa = pesquisaDocumento(documentoPesquisado);
+            if (posicaoPesquisa != -1) {
+                System.out.println("CONTA ENCONTRADA COM SUCESSO!");
+                mostraDados(posicaoPesquisa);
+            } else {
+                System.out.println("NENHUMA CONTA ENCONTRADA COM O DOCUMENTO " + documentoPesquisado);
+            }
+            System.out.println("NOVA PESQUISA ( S / N) ");
+            opcao1 = sc.nextLine().charAt(0);
+        } while (opcao1 != 'n' && opcao1 != 'N');
+    }
+
+    /**
      * Pesquisa um documento no vetor de documentos cadastrados. Percorre os
      * registros existentes e compara cada documento com o valor informado,
      * retornando a posição correspondente caso encontre uma correspondência.
