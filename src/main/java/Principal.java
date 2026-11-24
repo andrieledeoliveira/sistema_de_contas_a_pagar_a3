@@ -318,7 +318,43 @@ public class Principal {
             opcao2 = sc.nextLine().charAt(0);
         } while (opcao2 != 'n' && opcao2 != 'N');
     }
-
+    
+    /**
+     * Exibe o menu de relatórios de contas, permitindo ao usuário consultar as
+     * contas a pagar, visualizar as contas atrasadas e gerar o balanço de
+     * despesas. Permite retornar ao menu anterior por meio da opção de saída.
+     */
+     static void printRelatoriosDeContas() {
+         
+     }
+    
+       /**
+     * Exibe a relação de todas as contas cadastradas no sistema, apresentando
+     * suas respectivas datas de vencimento, valores, documentos, descrições e
+     * beneficiários. Caso não existam contas cadastradas, informa ao usuário.
+     */
+      static void contasPagar() {
+          
+      }
+      
+     /**
+     * Exibe a relação de contas atrasadas, verificando quais possuem data de
+     * vencimento anterior à data atual. Apresenta os dados das contas
+     * encontradas ou informa caso não existam contas atrasadas.
+     */
+    static void contasAtrasadas() {
+     
+    }
+    
+      /**
+     * Exibe o balanço mensal de despesas do período, calculando o total de
+     * débitos de cada mês e identificando o beneficiário com o maior valor de
+     * despesa correspondente.
+     */
+    static void balancoDeDespesas() {
+        
+    }
+     
     /**
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
      */
