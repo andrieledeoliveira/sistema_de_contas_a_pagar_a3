@@ -1,7 +1,18 @@
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Principal {
+
+    // Variavel global para podermos utlizar o scanner em qualquer lugar
+    private final static Scanner sc = new Scanner(System.in);
+    private static int N = 0;
+    // Dados das Contas
+    static String[] documentos = new String[100];
+    static String[] descricao = new String[100];
+    static String[] benediciario = new String[100];
+    static float[] valorDebito = new float[100];
+    static LocalDate[] dataVencimento = new LocalDate[100];
 
     /**
      * Pesquisa um documento no vetor de documentos cadastrados. Percorre os
