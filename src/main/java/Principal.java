@@ -1,5 +1,14 @@
 
 public class Principal {
+    
+    /**
+     * Exibe o cabeçalho do sistema, contendo o nome da empresa e a
+     * identificação do sistema de contas a pagar.
+     */
+    static void printCabecalho() {
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR\n");
+    }
 
     public static void main(String[] args) {
         int opcao;
