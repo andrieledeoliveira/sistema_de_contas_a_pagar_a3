@@ -1,4 +1,7 @@
 
+import java.time.LocalDate;
+
+
 public class Principal {
     
     /**
@@ -35,6 +38,23 @@ public class Principal {
             valor = Float.parseFloat(sc.nextLine());
         }
         return valor;
+    }
+    
+    /**
+     * Valida a data de vencimento informada, verificando se não é anterior à
+     * data atual. Caso seja retroativa, solicita uma nova data ao usuário.
+     *
+     * @param data data de vencimento a ser validada.
+     * @return data de vencimento válida.
+     */
+    static LocalDate validaData(LocalDate data) {
+        LocalDate hoje = LocalDate.now();
+        if (data.isBefore(hoje)) {
+            System.err.println("DATA NAO PODE SER RETROATIVA");
+            System.out.println("VENCIMENTO: (XXXX-XX-XX) ");
+            return LocalDate.parse(sc.nextLine());
+        }
+        return data;
     }
     
     /**
