@@ -2,6 +2,26 @@
 public class Principal {
     
     /**
+     * Pesquisa um documento no vetor de documentos cadastrados. Percorre os
+     * registros existentes e compara cada documento com o valor informado,
+     * retornando a posição correspondente caso encontre uma correspondência.
+     *
+     * @param documentoPesquisado Número do documento que será pesquisado.
+     * @return Índice da posição em que o documento foi encontrado no vetor.
+     * Retorna -1 caso nenhum documento correspondente seja encontrado.
+     */
+    static int pesquisaDocumento(String documentoPesquisado) {
+        // Recebe esse valor por conta de que se o documento não existir sabe-se pelo valor iniciado
+        int posicao = -1;
+        for (int i = 0; i < N; i++) {
+            if (documentos[i].equals(documentoPesquisado)) {
+                posicao = i;
+            }
+        }
+        return posicao;
+    }
+    
+    /**
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
      */
     static void printFinalizacao() {
