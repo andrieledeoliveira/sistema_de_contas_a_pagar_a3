@@ -1,9 +1,8 @@
 
 import java.time.LocalDate;
 
-
 public class Principal {
-    
+
     /**
      * Pesquisa um documento no vetor de documentos cadastrados. Percorre os
      * registros existentes e compara cada documento com o valor informado,
@@ -23,7 +22,7 @@ public class Principal {
         }
         return posicao;
     }
-    
+
     /**
      * Valida o valor informado, verificando se é positivo. Caso seja negativo,
      * solicita um novo valor ao usuário.
@@ -39,7 +38,7 @@ public class Principal {
         }
         return valor;
     }
-    
+
     /**
      * Valida a data de vencimento informada, verificando se não é anterior à
      * data atual. Caso seja retroativa, solicita uma nova data ao usuário.
@@ -56,7 +55,7 @@ public class Principal {
         }
         return data;
     }
-    
+
     /**
      * Exibe os dados de uma conta cadastrada no sistema, incluindo documento,
      * descrição, beneficiário, valor e data de vencimento.
@@ -70,14 +69,56 @@ public class Principal {
         System.out.println("VALOR        : " + valorDebito[endereco]);
         System.out.println("VENCIMENTO   : " + dataVencimento[endereco]);
     }
-    
+
+    /**
+     * Exibe o menu de baixa de contas, permitindo ao usuário pesquisar uma
+     * conta pelo número do documento, informar o valor pago e atualizar o saldo
+     * devedor. Solicita a confirmação da operação e permite realizar novas
+     * baixas enquanto o usuário desejar.
+     */
+    static void printBaixaDeContas() {
+        char opcao1;
+        char opcao2;
+        do {
+            printCabecalho();
+            System.out.println("MOVIMENTACAO - BAIXA DE CONTAS");
+            System.out.println("DIGITE O NUMERO DO DOCUMENTO QUE QUEIRA DAR BAIXA");
+            String documentoPesquisado = sc.nextLine();
+            int posicaoPesquisa = pesquisaDocumento(documentoPesquisado);
+            if (posicaoPesquisa != -1) {
+                System.out.println("DOCUMENTO   : " + documentos[posicaoPesquisa]);
+                System.out.println("VALOR ATUAL : " + valorDebito[posicaoPesquisa]);
+                System.out.println("QUAL VALOR VOCE PAGOU? ");
+                float valorPago = validarValor(Float.parseFloat(sc.nextLine()));
+                if (valorPago > valorDebito[posicaoPesquisa]) {
+                    System.err.println("VALOR NÃO PODE SER MAIOR QUE O DA CONTA");
+                    System.out.println("VALOR : ");
+                    valorPago = validarValor(Float.parseFloat(sc.nextLine()));
+                }
+                System.out.println("CONFIRMA BAIXA ( S / N )");
+                opcao1 = sc.nextLine().charAt(0);
+                if (opcao1 == 's' || opcao1 == 'S') {
+                    float valorFinal = valorDebito[posicaoPesquisa] - valorPago;
+                    valorDebito[posicaoPesquisa] = valorFinal;
+                    System.out.println("VALOR FINAL :" + valorFinal);
+                } else {
+                    System.out.println("VALOR NAO FOI SUBTRAIDO!");
+                }
+            } else {
+                System.out.println("NENHUMA CONTA ENCONTRADO!");
+            }
+            System.out.println("NOVA BAIXA ( S / N )");
+            opcao2 = sc.nextLine().charAt(0);
+        } while (opcao2 != 'n' && opcao2 != 'N');
+    }
+
     /**
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
      */
     static void printFinalizacao() {
         System.out.println("FINALIZANDO APLICAÇÃO...");
     }
-    
+
     /**
      * Exibe o cabeçalho do sistema, contendo o nome da empresa e a
      * identificação do sistema de contas a pagar.
@@ -107,6 +148,7 @@ public class Principal {
                 case 1:
                     break;
                 case 2:
+                    printBaixaDeContas();
                     break;
                 case 3:
                     break;
