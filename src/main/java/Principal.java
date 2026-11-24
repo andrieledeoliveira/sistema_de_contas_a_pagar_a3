@@ -72,7 +72,7 @@ public class Principal {
             System.out.println("INCLUSÃO DE CONTA");
             System.out.println("DOCUMENTO:");
             String documentoPesquisado = String.valueOf(sc.nextLine());
-            
+
             // Validação de documento
             int posicaoPesquisada = pesquisaDocumento(documentoPesquisado);
             if (posicaoPesquisada == -1) {
@@ -102,6 +102,43 @@ public class Principal {
                 System.out.println("DOCUMENTO JA CADASTRADO");
             }
             System.out.println("NOVA INCLUSÃO ( S/N ) ?");
+            opcao2 = sc.nextLine().charAt(0);
+        } while (opcao2 != 'n' && opcao2 != 'N');
+    }
+
+    static void alteracao() {
+        char opcao1;
+        char opcao2;
+        do {
+            printCabecalho();
+            System.out.println("ALTERAÇÃO DE CONTA");
+            System.out.println("DIGITE O NÚMERO DO DOCUMENTO QUE DESEJA ALTERAR:");
+            String documentoPesquisado = sc.nextLine();
+            int posicaoPesquisada = pesquisaDocumento(documentoPesquisado);
+            if (posicaoPesquisada != -1) {
+                System.out.println("DESCRICAO");
+                String novaDescricao = sc.nextLine();
+                System.out.println("BENEFICIARIO");
+                String novoBeneficiario = sc.nextLine();
+                System.out.println("VALOR:");
+                //Validação para checar se o valor é positivo
+                float novoValor = validarValor(Float.parseFloat(sc.nextLine()));
+                System.out.println("VENCIMENTO: (XXXX-XX-XX) ");
+                LocalDate novaData = LocalDate.parse(sc.nextLine());
+                System.out.print("CONFIRMA ALTERACAO ( S/N ) ? ");
+                opcao1 = sc.nextLine().charAt(0);
+                if (opcao1 == 's' || opcao1 == 'S') {
+                    descricao[posicaoPesquisada] = novaDescricao;
+                    benediciario[posicaoPesquisada] = novoBeneficiario;
+                    valorDebito[posicaoPesquisada] = novoValor;
+                    dataVencimento[posicaoPesquisada] = novaData;
+                } else {
+                    System.out.println("Informações descartadas");
+                }
+            } else {
+                System.err.println("NENHUMA CONTA ENCONTRADA COM O DOCUMENTO" + documentoPesquisado);
+            }
+            System.out.println("NOVA ALTERACAO ( S/N ) ?");
             opcao2 = sc.nextLine().charAt(0);
         } while (opcao2 != 'n' && opcao2 != 'N');
     }
