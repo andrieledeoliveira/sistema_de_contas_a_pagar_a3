@@ -356,7 +356,20 @@ public class Principal {
      * beneficiários. Caso não existam contas cadastradas, informa ao usuário.
      */
       static void contasPagar() {
-          
+       printCabecalho();
+        System.out.println("CONTAS A PAGAR POR PERÍODO");
+        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("VENCIMENTO\tVALOR\t\tDOCUMENTO\tDESCRIÇÃO\tBENEFICIÁRIO");
+        System.out.println("---------------------------------------------------------------------------------");
+
+        if (N == 0) {
+            System.out.println("Nenhuma conta cadastrada.");
+        } else {
+            for (int i = 0; i < N; i++) {
+                System.out.println(dataVencimento[i] + "\t" + valorDebito[i] + "\t\t" + documentos[i] + "\t\t" + descricao[i] + "\t\t" + benediciario[i]);
+            }
+        }
+        System.out.println("-----------------------------------------------------------------------------------");    
       }
       
      /**
