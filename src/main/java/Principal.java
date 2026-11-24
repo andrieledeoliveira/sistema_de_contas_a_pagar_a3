@@ -58,6 +58,20 @@ public class Principal {
     }
     
     /**
+     * Exibe os dados de uma conta cadastrada no sistema, incluindo documento,
+     * descrição, beneficiário, valor e data de vencimento.
+     *
+     * @param endereco posição da conta nos vetores de armazenamento.
+     */
+    static void mostraDados(int endereco) {
+        System.out.println("DOCUMENTO    : " + documentos[endereco]);
+        System.out.println("DESCRICAO    : " + descricao[endereco]);
+        System.out.println("BENEFICIARIO : " + benediciario[endereco]);
+        System.out.println("VALOR        : " + valorDebito[endereco]);
+        System.out.println("VENCIMENTO   : " + dataVencimento[endereco]);
+    }
+    
+    /**
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
      */
     static void printFinalizacao() {
