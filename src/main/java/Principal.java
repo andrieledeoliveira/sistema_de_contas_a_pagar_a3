@@ -37,7 +37,7 @@ public class Principal {
             switch (opcao) {
                 case 1:
                     if (N < 100) {
-                      ;
+                        ;
                     } else {
                         System.out.println("Cadastro cheio!");
                     }
@@ -53,6 +53,57 @@ public class Principal {
                     break;
             }
         } while (opcao != 0);
+    }
+
+    /**
+     * Permite cadastrar novas contas no sistema, solicitando os dados de
+     * documento, descrição, beneficiário, valor e data de vencimento. Verifica
+     * se o documento já está cadastrado, realiza a validação do valor e da data
+     * informados e solicita a confirmação da inclusão. Caso confirmada,
+     * armazena os dados nos respectivos vetores e atualiza a quantidade de
+     * contas cadastradas. Permite realizar novas inclusões enquanto o usuário
+     * desejar.
+     */
+    static void inclusao() {
+        char opcao1;
+        char opcao2;
+        do {
+            printCabecalho();
+            System.out.println("INCLUSÃO DE CONTA");
+            System.out.println("DOCUMENTO:");
+            String documentoPesquisado = String.valueOf(sc.nextLine());
+            
+            // Validação de documento
+            int posicaoPesquisada = pesquisaDocumento(documentoPesquisado);
+            if (posicaoPesquisada == -1) {
+                documentos[N] = documentoPesquisado;
+                System.out.println("DESCRIÇÃO:");
+                descricao[N] = sc.nextLine();
+                System.out.println("BENEFEICIÁRIO:");
+                benediciario[N] = sc.nextLine();
+                System.out.println("VALOR:");
+                //Validação para checar se o valor é positivo
+                float valor = validarValor(Float.parseFloat(sc.nextLine()));
+                valorDebito[N] = valor;
+                // Validação de data
+                System.out.println("VENCIMENTO: (XXXX-XX-XX)");
+                LocalDate data = validaData(LocalDate.parse(sc.nextLine()));
+                dataVencimento[N] = data;
+                System.out.print("CONFIRMA INCLUSÃO ( S/N ) ? ");
+                opcao1 = sc.nextLine().charAt(0);
+                if (opcao1 == 's' || opcao1 == 'S') {
+                    System.out.println("CONTA CADASTRADA COM SUCESSO!");
+                    mostraDados(N);
+                    N++;
+                } else {
+                    System.out.println("Informações descartadas");
+                }
+            } else {
+                System.out.println("DOCUMENTO JA CADASTRADO");
+            }
+            System.out.println("NOVA INCLUSÃO ( S/N ) ?");
+            opcao2 = sc.nextLine().charAt(0);
+        } while (opcao2 != 'n' && opcao2 != 'N');
     }
 
     /**
