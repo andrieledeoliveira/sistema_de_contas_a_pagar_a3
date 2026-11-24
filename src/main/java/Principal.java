@@ -2,6 +2,13 @@
 public class Principal {
     
     /**
+     * Exibe uma mensagem informando que a aplicação está sendo finalizada.
+     */
+    static void printFinalizacao() {
+        System.out.println("FINALIZANDO APLICAÇÃO...");
+    }
+    
+    /**
      * Exibe o cabeçalho do sistema, contendo o nome da empresa e a
      * identificação do sistema de contas a pagar.
      */
