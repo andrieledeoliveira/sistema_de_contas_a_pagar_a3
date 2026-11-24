@@ -10,7 +10,7 @@ public class Principal {
     // Dados das Contas
     static String[] documentos = new String[100];
     static String[] descricao = new String[100];
-    static String[] benediciario = new String[100];
+    static String[] beneficiario = new String[100];
     static float[] valorDebito = new float[100];
     static LocalDate[] dataVencimento = new LocalDate[100];
 
@@ -24,33 +24,37 @@ public class Principal {
         int opcao;
         do {
             printCabecalho();
-            System.out.println("CADASTRO DE CONTAS");
-            System.out.println("1 - INCLUSÃO");
-            System.out.println("2 - ALTERAÇÃO");
-            System.out.println("3 - CONSULTA");
-            System.out.println("4 - EXCLUSÃO");
-            System.out.println("0 - RETORNAR");
-            System.out.print("OPÇÃO : ");
+            System.out.println("Cadastro de contas");
+            System.out.println("1 - Inclusao");
+            System.out.println("2 - Alteracao");
+            System.out.println("3 - Consulta");
+            System.out.println("4 - Exclusao");
+            System.out.println("0 - Retornar");
+            System.out.print("opcao : ");
             opcao = sc.nextInt();
             sc.nextLine();
 
             switch (opcao) {
                 case 1:
                     if (N < 100) {
-                        ;
+                       inclusao ();
                     } else {
                         System.out.println("Cadastro cheio!");
                     }
                     break;
                 case 2:
-                      ;
+                      alteracao();
                     break;
                 case 3:
-                      ;
+                      consulta() ;
                     break;
+                            
                 case 4:
-                      ;
+                     exclusao() ;
                     break;
+                    
+                default:
+                    System.out.println("Opcao Invalida");
             }
         } while (opcao != 0);
     }
@@ -69,39 +73,39 @@ public class Principal {
         char opcao2;
         do {
             printCabecalho();
-            System.out.println("INCLUSÃO DE CONTA");
-            System.out.println("DOCUMENTO:");
+            System.out.println("Inclusao de conta");
+            System.out.println("Documento:");
             String documentoPesquisado = String.valueOf(sc.nextLine());
 
             // Validação de documento
             int posicaoPesquisada = pesquisaDocumento(documentoPesquisado);
             if (posicaoPesquisada == -1) {
                 documentos[N] = documentoPesquisado;
-                System.out.println("DESCRIÇÃO:");
+                System.out.println("Descricao:");
                 descricao[N] = sc.nextLine();
-                System.out.println("BENEFEICIÁRIO:");
-                benediciario[N] = sc.nextLine();
-                System.out.println("VALOR:");
+                System.out.println("Beneficiario:");
+                beneficiario[N] = sc.nextLine();
+                System.out.println("Valor:");
                 //Validação para checar se o valor é positivo
                 float valor = validarValor(Float.parseFloat(sc.nextLine()));
                 valorDebito[N] = valor;
                 // Validação de data
-                System.out.println("VENCIMENTO: (XXXX-XX-XX)");
+                System.out.println("Vencimento: (XXXX-XX-XX)");
                 LocalDate data = validaData(LocalDate.parse(sc.nextLine()));
                 dataVencimento[N] = data;
-                System.out.print("CONFIRMA INCLUSÃO ( S/N ) ? ");
+                System.out.print("Confirma a inclusao ( S/N ) ? ");
                 opcao1 = sc.nextLine().charAt(0);
                 if (opcao1 == 's' || opcao1 == 'S') {
-                    System.out.println("CONTA CADASTRADA COM SUCESSO!");
+                    System.out.println("Conta cadastrada com sucesso!");
                     mostraDados(N);
                     N++;
                 } else {
-                    System.out.println("Informações descartadas");
+                    System.out.println("Informacoes descartadas");
                 }
             } else {
-                System.out.println("DOCUMENTO JA CADASTRADO");
+                System.out.println("Documeento ja cadastrado");
             }
-            System.out.println("NOVA INCLUSÃO ( S/N ) ?");
+            System.out.println("Nova inclusao ( S/N ) ?");
             opcao2 = sc.nextLine().charAt(0);
         } while (opcao2 != 'n' && opcao2 != 'N');
     }
@@ -111,34 +115,34 @@ public class Principal {
         char opcao2;
         do {
             printCabecalho();
-            System.out.println("ALTERAÇÃO DE CONTA");
-            System.out.println("DIGITE O NÚMERO DO DOCUMENTO QUE DESEJA ALTERAR:");
+            System.out.println("Alteracao de conta");
+            System.out.println("Digite o numero do documento que deseja alterar:");
             String documentoPesquisado = sc.nextLine();
             int posicaoPesquisada = pesquisaDocumento(documentoPesquisado);
             if (posicaoPesquisada != -1) {
-                System.out.println("DESCRICAO");
+                System.out.println("Descricao");
                 String novaDescricao = sc.nextLine();
-                System.out.println("BENEFICIARIO");
+                System.out.println("Beneficiario");
                 String novoBeneficiario = sc.nextLine();
-                System.out.println("VALOR:");
+                System.out.println("Valor:");
                 //Validação para checar se o valor é positivo
                 float novoValor = validarValor(Float.parseFloat(sc.nextLine()));
-                System.out.println("VENCIMENTO: (XXXX-XX-XX) ");
+                System.out.println("Vencimento: (XXXX-XX-XX) ");
                 LocalDate novaData = LocalDate.parse(sc.nextLine());
-                System.out.print("CONFIRMA ALTERACAO ( S/N ) ? ");
+                System.out.print("Confirma alteracao ( S/N ) ? ");
                 opcao1 = sc.nextLine().charAt(0);
                 if (opcao1 == 's' || opcao1 == 'S') {
                     descricao[posicaoPesquisada] = novaDescricao;
-                    benediciario[posicaoPesquisada] = novoBeneficiario;
+                    beneficiario[posicaoPesquisada] = novoBeneficiario;
                     valorDebito[posicaoPesquisada] = novoValor;
                     dataVencimento[posicaoPesquisada] = novaData;
                 } else {
-                    System.out.println("Informações descartadas");
+                    System.out.println("Informacoes descartadas");
                 }
             } else {
-                System.err.println("NENHUMA CONTA ENCONTRADA COM O DOCUMENTO" + documentoPesquisado);
+                System.err.println("Nenhuma conta encontrada com o documento" + documentoPesquisado);
             }
-            System.out.println("NOVA ALTERACAO ( S/N ) ?");
+            System.out.println("Nova alteracao ( S/N ) ?");
             opcao2 = sc.nextLine().charAt(0);
         } while (opcao2 != 'n' && opcao2 != 'N');
     }
@@ -154,17 +158,17 @@ public class Principal {
         char opcao1;
         do {
             printCabecalho();
-            System.out.println("CONSULTA DE CONTA");
-            System.out.println("DIGITE O NÚMERO DO DOCUMENTO QUE DESEJA PESQUISAR:");
+            System.out.println("Consulta de conta");
+            System.out.println("Digite o numero do documento que deseja pesquisar:");
             String documentoPesquisado = sc.nextLine();
             int posicaoPesquisa = pesquisaDocumento(documentoPesquisado);
             if (posicaoPesquisa != -1) {
-                System.out.println("CONTA ENCONTRADA COM SUCESSO!");
+                System.out.println("Conta encontrada com sucesso!");
                 mostraDados(posicaoPesquisa);
             } else {
-                System.out.println("NENHUMA CONTA ENCONTRADA COM O DOCUMENTO " + documentoPesquisado);
+                System.out.println("Nenhuma conta encontrada com o documento " + documentoPesquisado);
             }
-            System.out.println("NOVA PESQUISA ( S / N) ");
+            System.out.println("Nova pesquisa ( S / N) ");
             opcao1 = sc.nextLine().charAt(0);
         } while (opcao1 != 'n' && opcao1 != 'N');
     }
@@ -180,32 +184,32 @@ public class Principal {
         char opcao2;
         do {
             printCabecalho();
-            System.out.println("EXCLUSÃO DE CONTA");
-            System.out.println("DIGITE O NÚMERO DO DOCUMENTO QUE DESEJA EXCLUIR:");
+            System.out.println("Exclusao de conta");
+            System.out.println("Digite o numero do documento:");
             String documentoPesquisado = sc.nextLine();
             int posicaoPesquisa = pesquisaDocumento(documentoPesquisado);
             if (posicaoPesquisa != -1) {
-                System.out.println("CONTA ENCONTRADA COM SUCESSO!");
+                System.out.println("Conta encontrada com sucesso!");
                 mostraDados(posicaoPesquisa);
-                System.out.print("CONFIRMA EXCLUSAO ( S/N ) ? ");
+                System.out.print("Confirma exclusao ( S/N ) ? ");
                 opcao1 = sc.nextLine().charAt(0);
                 if (opcao1 == 's' || opcao1 == 'S') {
                     for (int i = posicaoPesquisa; i < N - 1; i++) {
                         documentos[i] = documentos[i + 1];
                         descricao[i] = descricao[i + 1];
-                        benediciario[i] = benediciario[i + 1];
+                        beneficiario[i] = beneficiario[i + 1];
                         valorDebito[i] = valorDebito[i + 1];
                         dataVencimento[i] = dataVencimento[i + 1];
                     }
                     N--;
-                    System.out.println("EXCLUSAO CONCLUÍDA COM SUCESSO");
+                    System.out.println("Exclusao concluida com sucesso");
                 } else {
-                    System.out.println("EXCLUSAO DESCARTADA - DADOS CONTINUAM SALVOS");
+                    System.out.println("Exclusao descartada - dados continuam salvos");
                 }
             } else {
-                System.err.println("NENHUMA CONTA ENCONTRADA COM O DOCUMENTO" + documentoPesquisado);
+                System.err.println("Nenhuma conta encontrada com o documento" + documentoPesquisado);
             }
-            System.out.println("NOVA EXCLUSAO ( S/N ) ?");
+            System.out.println("Nova exclusao ( S/N ) ?");
             opcao2 = sc.nextLine().charAt(0);
         } while (opcao2 != 'n' && opcao2 != 'N');
     }
@@ -239,8 +243,8 @@ public class Principal {
      */
     static float validarValor(Float valor) {
         if (valor < 0) {
-            System.err.println("VALOR PRECISA SER POSITIVO");
-            System.out.println("VALOR:");
+            System.err.println("Valor precisa ser positivo");
+            System.out.println("Valor:");
             valor = Float.parseFloat(sc.nextLine());
         }
         return valor;
@@ -256,8 +260,8 @@ public class Principal {
     static LocalDate validaData(LocalDate data) {
         LocalDate hoje = LocalDate.now();
         if (data.isBefore(hoje)) {
-            System.err.println("DATA NAO PODE SER RETROATIVA");
-            System.out.println("VENCIMENTO: (XXXX-XX-XX) ");
+            System.err.println("Data nao pode ser retroativa");
+            System.out.println("Vencimento: (XXXX-XX-XX) ");
             return LocalDate.parse(sc.nextLine());
         }
         return data;
@@ -270,11 +274,11 @@ public class Principal {
      * @param endereco posição da conta nos vetores de armazenamento.
      */
     static void mostraDados(int endereco) {
-        System.out.println("DOCUMENTO    : " + documentos[endereco]);
-        System.out.println("DESCRICAO    : " + descricao[endereco]);
-        System.out.println("BENEFICIARIO : " + benediciario[endereco]);
-        System.out.println("VALOR        : " + valorDebito[endereco]);
-        System.out.println("VENCIMENTO   : " + dataVencimento[endereco]);
+        System.out.println("Documento    : " + documentos[endereco]);
+        System.out.println("Descricao    : " + descricao[endereco]);
+        System.out.println("Beneficiario : " + beneficiario[endereco]);
+        System.out.println("Valor        : " + valorDebito[endereco]);
+        System.out.println("Vencimento   : " + dataVencimento[endereco]);
     }
 
     /**
@@ -288,33 +292,33 @@ public class Principal {
         char opcao2;
         do {
             printCabecalho();
-            System.out.println("MOVIMENTACAO - BAIXA DE CONTAS");
-            System.out.println("DIGITE O NUMERO DO DOCUMENTO QUE QUEIRA DAR BAIXA");
+            System.out.println("Movimentacao - Baixa de Contas");
+            System.out.println("Digite o Numero do documento que queira dar baixa");
             String documentoPesquisado = sc.nextLine();
             int posicaoPesquisa = pesquisaDocumento(documentoPesquisado);
             if (posicaoPesquisa != -1) {
-                System.out.println("DOCUMENTO   : " + documentos[posicaoPesquisa]);
-                System.out.println("VALOR ATUAL : " + valorDebito[posicaoPesquisa]);
-                System.out.println("QUAL VALOR VOCE PAGOU? ");
+                System.out.println("Documento   : " + documentos[posicaoPesquisa]);
+                System.out.println("Valor atual : " + valorDebito[posicaoPesquisa]);
+                System.out.println("Qual valor voce pagou? ");
                 float valorPago = validarValor(Float.parseFloat(sc.nextLine()));
                 if (valorPago > valorDebito[posicaoPesquisa]) {
-                    System.err.println("VALOR NÃO PODE SER MAIOR QUE O DA CONTA");
-                    System.out.println("VALOR : ");
+                    System.err.println("Valor nao pode ser maior que o da conta");
+                    System.out.println("Valor : ");
                     valorPago = validarValor(Float.parseFloat(sc.nextLine()));
                 }
-                System.out.println("CONFIRMA BAIXA ( S / N )");
+                System.out.println("Confirma baixa ( S / N )");
                 opcao1 = sc.nextLine().charAt(0);
                 if (opcao1 == 's' || opcao1 == 'S') {
                     float valorFinal = valorDebito[posicaoPesquisa] - valorPago;
                     valorDebito[posicaoPesquisa] = valorFinal;
-                    System.out.println("VALOR FINAL :" + valorFinal);
+                    System.out.println("Valor final :" + valorFinal);
                 } else {
-                    System.out.println("VALOR NAO FOI SUBTRAIDO!");
+                    System.out.println("Valor nao foi subtraido!");
                 }
             } else {
-                System.out.println("NENHUMA CONTA ENCONTRADO!");
+                System.out.println("Nenhuma conta encontrada!");
             }
-            System.out.println("NOVA BAIXA ( S / N )");
+            System.out.println("nova baixa ( S / N )");
             opcao2 = sc.nextLine().charAt(0);
         } while (opcao2 != 'n' && opcao2 != 'N');
     }
@@ -328,12 +332,12 @@ public class Principal {
         int opcao;
         do {
             printCabecalho();
-            System.out.println("RELATÓRIOS");
-            System.out.println("1 - CONTAS A PAGAR");
-            System.out.println("2 - CONTAS A ATRASADAS");
-            System.out.println("3 - BALANÇO DE DESPESAS");
-            System.out.println("0 - RETORNAR");
-            System.out.print("OPÇÃO : ");
+            System.out.println("Relatorios");
+            System.out.println("1 - Contas a pagar");
+            System.out.println("2 - Contas atrasadas");
+            System.out.println("3 - Balanco de despesas");
+            System.out.println("0 - Retornar");
+            System.out.print("Opcao : ");
             opcao = Integer.parseInt(sc.nextLine());
 
             switch (opcao) {
@@ -357,16 +361,16 @@ public class Principal {
      */
       static void contasPagar() {
        printCabecalho();
-        System.out.println("CONTAS A PAGAR POR PERÍODO");
+        System.out.println("Contas a pagar por periodo");
         System.out.println("---------------------------------------------------------------------------------");
-        System.out.println("VENCIMENTO\tVALOR\t\tDOCUMENTO\tDESCRIÇÃO\tBENEFICIÁRIO");
+        System.out.println("Vencimento\tValor\t\tDocumento\tDescricao\tBeneficiario");
         System.out.println("---------------------------------------------------------------------------------");
 
         if (N == 0) {
             System.out.println("Nenhuma conta cadastrada.");
         } else {
             for (int i = 0; i < N; i++) {
-                System.out.println(dataVencimento[i] + "\t" + valorDebito[i] + "\t\t" + documentos[i] + "\t\t" + descricao[i] + "\t\t" + benediciario[i]);
+                System.out.println(dataVencimento[i] + "\t" + valorDebito[i] + "\t\t" + documentos[i] + "\t\t" + descricao[i] + "\t\t" + beneficiario[i]);
             }
         }
         System.out.println("-----------------------------------------------------------------------------------");    
@@ -379,9 +383,9 @@ public class Principal {
      */
     static void contasAtrasadas() {
       printCabecalho();
-        System.out.println("CONTAS A ATRASADAS");
+        System.out.println("Contas atrasadas");
         System.out.println("-----------------------------------------------------------------------------------------------");
-        System.out.println("VENCIMENTO \t VALOR \t\t DOCUMENTO \t DESCRIÇÃO \t BENEFICIÁRIO");
+        System.out.println("Vencimento \t Valor \t\t Documento \t Descricao \t Beneficiario");
         System.out.println("-----------------------------------------------------------------------------------------------");
 
         LocalDate hoje = LocalDate.now();
@@ -389,7 +393,7 @@ public class Principal {
 
         for (int i = 0; i < N; i++) {
             if (dataVencimento[i] != null && dataVencimento[i].isBefore(hoje)) {
-                System.out.println(dataVencimento[i] + "\t" + valorDebito[i] + "\t\t" + documentos[i] + "\t\t" + descricao[i] + "\t\t" + benediciario[i]);
+                System.out.println(dataVencimento[i] + "\t" + valorDebito[i] + "\t\t" + documentos[i] + "\t\t" + descricao[i] + "\t\t" + beneficiario[i]);
                 encontrouConta++;
             }
         }
@@ -407,13 +411,13 @@ public class Principal {
      */
     static void balancoDeDespesas() {
      printCabecalho();
-        System.out.println("BALANÇO DE DESPESAS NO PERÍODO");
+        System.out.println("Balanco de despesas no periodo");
         System.out.println("-----------------------------------------------------------------------------------------------");
-        System.out.println("MÊS\t\tTOTAL DE DESPESAS\tMAIOR BENEFICIÁRIO");
+        System.out.println("Mes\t\tTotal de despesas\tMaior beneficiario");
         System.out.println("-----------------------------------------------------------------------------------------------");
 
-        String[] meses = {"JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
-            "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"};
+        String[] meses = {"Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
 
         for (int m = 1; m <= 12; m++) {
             double totalMes = 0;
@@ -425,7 +429,7 @@ public class Principal {
                     totalMes += valorDebito[i];
                     if (valorDebito[i] > maiorValor) {
                         maiorValor = valorDebito[i];
-                        maiorBeneficiarioMes = benediciario[i];
+                        maiorBeneficiarioMes = beneficiario[i];
                     }
                 }
             }
@@ -440,7 +444,7 @@ public class Principal {
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
      */
     static void printFinalizacao() {
-        System.out.println("FINALIZANDO APLICAÇÃO...");
+        System.out.println("Finalizando aplicacao...");
     }
 
     /**
@@ -448,8 +452,8 @@ public class Principal {
      * identificação do sistema de contas a pagar.
      */
     static void printCabecalho() {
-        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
-        System.out.println("SISTEMA DE CONTAS A PAGAR\n");
+        System.out.println("\nXYZ Comercio de Produtos LTDA.");
+        System.out.println("Sistema de contas a pagar\n");
     }
 
     public static void main(String[] args) {
@@ -460,16 +464,17 @@ public class Principal {
         // Menu inicial
         do {
             printCabecalho();
-            System.out.println("MENU PRINCIPAL\n");
-            System.out.println("1 - CADASTRO DE CONTAS");
-            System.out.println("2 - BAIXA DE CONTAS");
-            System.out.println("3 - RELATÓRIOS");
-            System.out.println("0 - FINALIZAR");
-            System.out.print("OPÇÃO : ");
+            System.out.println("Menu principal\n");
+            System.out.println("1 - Cadastro de contas");
+            System.out.println("2 - Baixa de contas");
+            System.out.println("3 - Relatorios");
+            System.out.println("0 - Finalizar");
+            System.out.print("opcao : ");
             opcao = Integer.parseInt(sc.nextLine());
 
             switch (opcao) {
                 case 1:
+                    printCadastroDeContas();
                     break;
                 case 2:
                     printBaixaDeContas();
@@ -480,7 +485,7 @@ public class Principal {
                 case 0:
                     break;
                 default:
-                    System.err.println("Opção Inválida\n");
+                    System.err.println("Opcao Invalida\n");
             }
         } while (opcao != 0);
     }
