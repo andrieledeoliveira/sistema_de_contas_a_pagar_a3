@@ -15,6 +15,47 @@ public class Principal {
     static LocalDate[] dataVencimento = new LocalDate[100];
 
     /**
+     * Exibe o menu de cadastro de contas, permitindo ao usuário realizar
+     * operações de inclusão, alteração, consulta e exclusão de contas. Verifica
+     * a disponibilidade de espaço nos vetores antes de permitir uma nova
+     * inclusão e possibilita retornar ao menu anterior.
+     */
+    static void printCadastroDeContas() {
+        int opcao;
+        do {
+            printCabecalho();
+            System.out.println("CADASTRO DE CONTAS");
+            System.out.println("1 - INCLUSÃO");
+            System.out.println("2 - ALTERAÇÃO");
+            System.out.println("3 - CONSULTA");
+            System.out.println("4 - EXCLUSÃO");
+            System.out.println("0 - RETORNAR");
+            System.out.print("OPÇÃO : ");
+            opcao = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    if (N < 100) {
+                      ;
+                    } else {
+                        System.out.println("Cadastro cheio!");
+                    }
+                    break;
+                case 2:
+                      ;
+                    break;
+                case 3:
+                      ;
+                    break;
+                case 4:
+                      ;
+                    break;
+            }
+        } while (opcao != 0);
+    }
+
+    /**
      * Pesquisa um documento no vetor de documentos cadastrados. Percorre os
      * registros existentes e compara cada documento com o valor informado,
      * retornando a posição correspondente caso encontre uma correspondência.
