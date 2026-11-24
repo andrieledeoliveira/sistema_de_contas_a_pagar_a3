@@ -168,6 +168,47 @@ public class Principal {
             opcao1 = sc.nextLine().charAt(0);
         } while (opcao1 != 'n' && opcao1 != 'N');
     }
+    /**
+     * Permite excluir uma conta cadastrada no sistema por meio da pesquisa pelo
+     * número do documento. Exibe os dados da conta encontrada, solicita a
+     * confirmação da exclusão e, caso confirmada, remove seus dados dos
+     * vetores, reorganizando as posições e atualizando a quantidade de contas
+     * cadastradas. Permite realizar novas exclusões enquanto o usuário desejar.
+     */
+    static void exclusao() {
+        char opcao1;
+        char opcao2;
+        do {
+            printCabecalho();
+            System.out.println("EXCLUSÃO DE CONTA");
+            System.out.println("DIGITE O NÚMERO DO DOCUMENTO QUE DESEJA EXCLUIR:");
+            String documentoPesquisado = sc.nextLine();
+            int posicaoPesquisa = pesquisaDocumento(documentoPesquisado);
+            if (posicaoPesquisa != -1) {
+                System.out.println("CONTA ENCONTRADA COM SUCESSO!");
+                mostraDados(posicaoPesquisa);
+                System.out.print("CONFIRMA EXCLUSAO ( S/N ) ? ");
+                opcao1 = sc.nextLine().charAt(0);
+                if (opcao1 == 's' || opcao1 == 'S') {
+                    for (int i = posicaoPesquisa; i < N - 1; i++) {
+                        documentos[i] = documentos[i + 1];
+                        descricao[i] = descricao[i + 1];
+                        benediciario[i] = benediciario[i + 1];
+                        valorDebito[i] = valorDebito[i + 1];
+                        dataVencimento[i] = dataVencimento[i + 1];
+                    }
+                    N--;
+                    System.out.println("EXCLUSAO CONCLUÍDA COM SUCESSO");
+                } else {
+                    System.out.println("EXCLUSAO DESCARTADA - DADOS CONTINUAM SALVOS");
+                }
+            } else {
+                System.err.println("NENHUMA CONTA ENCONTRADA COM O DOCUMENTO" + documentoPesquisado);
+            }
+            System.out.println("NOVA EXCLUSAO ( S/N ) ?");
+            opcao2 = sc.nextLine().charAt(0);
+        } while (opcao2 != 'n' && opcao2 != 'N');
+    }
 
     /**
      * Pesquisa um documento no vetor de documentos cadastrados. Percorre os
