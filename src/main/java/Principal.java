@@ -325,7 +325,29 @@ public class Principal {
      * despesas. Permite retornar ao menu anterior por meio da opção de saída.
      */
      static void printRelatoriosDeContas() {
-         
+        int opcao;
+        do {
+            printCabecalho();
+            System.out.println("RELATÓRIOS");
+            System.out.println("1 - CONTAS A PAGAR");
+            System.out.println("2 - CONTAS A ATRASADAS");
+            System.out.println("3 - BALANÇO DE DESPESAS");
+            System.out.println("0 - RETORNAR");
+            System.out.print("OPÇÃO : ");
+            opcao = Integer.parseInt(sc.nextLine());
+
+            switch (opcao) {
+                case 1:
+                    contasPagar();
+                    break;
+                case 2:
+                    contasAtrasadas();
+                    break;
+                case 3:
+                    balancoDeDespesas();
+                    break;
+            }
+        } while (opcao != 0); 
      }
     
        /**
@@ -394,6 +416,7 @@ public class Principal {
                     printBaixaDeContas();
                     break;
                 case 3:
+                    printRelatoriosDeContas();
                     break;
                 case 0:
                     break;
