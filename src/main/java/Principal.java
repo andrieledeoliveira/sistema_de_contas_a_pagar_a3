@@ -22,6 +22,22 @@ public class Principal {
     }
     
     /**
+     * Valida o valor informado, verificando se é positivo. Caso seja negativo,
+     * solicita um novo valor ao usuário.
+     *
+     * @param valor valor informado para validação.
+     * @return valor validado.
+     */
+    static float validarValor(Float valor) {
+        if (valor < 0) {
+            System.err.println("VALOR PRECISA SER POSITIVO");
+            System.out.println("VALOR:");
+            valor = Float.parseFloat(sc.nextLine());
+        }
+        return valor;
+    }
+    
+    /**
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
      */
     static void printFinalizacao() {
