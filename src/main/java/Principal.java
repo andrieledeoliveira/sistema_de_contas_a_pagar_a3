@@ -406,8 +406,35 @@ public class Principal {
      * despesa correspondente.
      */
     static void balancoDeDespesas() {
-        
-    }
+     printCabecalho();
+        System.out.println("BALANÇO DE DESPESAS NO PERÍODO");
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        System.out.println("MÊS\t\tTOTAL DE DESPESAS\tMAIOR BENEFICIÁRIO");
+        System.out.println("-----------------------------------------------------------------------------------------------");
+
+        String[] meses = {"JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+            "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"};
+
+        for (int m = 1; m <= 12; m++) {
+            double totalMes = 0;
+            String maiorBeneficiarioMes = "-";
+            double maiorValor = 0;
+
+            for (int i = 0; i < N; i++) {
+                if (dataVencimento[i] != null && dataVencimento[i].getMonthValue() == m) {
+                    totalMes += valorDebito[i];
+                    if (valorDebito[i] > maiorValor) {
+                        maiorValor = valorDebito[i];
+                        maiorBeneficiarioMes = benediciario[i];
+                    }
+                }
+            }
+
+            System.out.println(meses[m - 1] + "\t\t" + totalMes + "\t\t\t" + maiorBeneficiarioMes);
+        }
+        System.out.println("-----------------------------------------------------------------------------------------------");
+    }   
+    
      
     /**
      * Exibe uma mensagem informando que a aplicação está sendo finalizada.
