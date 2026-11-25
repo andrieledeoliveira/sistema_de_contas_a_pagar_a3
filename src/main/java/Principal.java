@@ -483,6 +483,7 @@ public class Principal {
                     printRelatoriosDeContas();
                     break;
                 case 0:
+                    printFinalizacao();
                     break;
                 default:
                     System.err.println("Opcao Invalida\n");
